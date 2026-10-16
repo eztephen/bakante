@@ -1,0 +1,14 @@
+export type Point = { lat: number; lng: number };
+
+const R = 6371; // km
+const rad = (deg: number) => (deg * Math.PI) / 180;
+
+// Great-circle distance in kilometres.
+export function distanceKm(a: Point, b: Point): number {
+  const dLat = rad(b.lat - a.lat);
+  const dLng = rad(b.lng - a.lng);
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+
+export const formatDistance = (km: number) => (km < 1 ? `${Math.round(km * 1000)} m` : `${km.toFixed(km < 10 ? 1 : 0)} km`);

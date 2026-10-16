@@ -1,0 +1,256 @@
+@import "tailwindcss";
+
+/* Taraflex green — the surface most Philippine badminton courts are laid with —
+   with painted white lines and a ball-orange accent. Light and dark follow the device. */
+:root {
+  --paper: #f2f4f0;
+  --surface: #ffffff;
+  --surface-2: #f7f9f6;
+  --court: #2f6b4f;
+  --court-deep: #1f4d38;
+  --court-wash: #e3efe8;
+  --court-surface: #3a7d5c;
+  --court-paint: #f4f7f3;
+  --tangerine: #f26b1d;
+  --tangerine-deep: #c9520f;
+  --tangerine-wash: #fdebdf;
+  --on-tangerine: #1c0d04;
+  --ink: #14221b;
+  --ink-soft: #4f6358;
+  --ink-faint: #7e928a;
+  --line: #d3ddd7;
+  --line-soft: #e5ece8;
+  --danger: #c0392b;
+  --danger-wash: #fbe7e4;
+  --shadow: 0 18px 40px -22px rgb(20 34 27 / 0.35);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0e1613;
+    --surface: #152019;
+    --surface-2: #1a2720;
+    --court: #4fa37d;
+    --court-deep: #0f2a1f;
+    --court-wash: #16302a;
+    --court-surface: #2b5d45;
+    --court-paint: #e9f0ec;
+    --tangerine: #ff8a3d;
+    --tangerine-deep: #ffa468;
+    --tangerine-wash: #33200f;
+    --on-tangerine: #1c0d04;
+    --ink: #e9f0ec;
+    --ink-soft: #a3b5ac;
+    --ink-faint: #6f8279;
+    --line: #27392f;
+    --line-soft: #1d2c25;
+    --danger: #ff7b6b;
+    --danger-wash: #331a16;
+    --shadow: 0 18px 40px -22px rgb(0 0 0 / 0.7);
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-court: var(--court);
+  --color-court-deep: var(--court-deep);
+  --color-court-wash: var(--court-wash);
+  --color-court-surface: var(--court-surface);
+  --color-court-paint: var(--court-paint);
+  --color-tangerine: var(--tangerine);
+  --color-tangerine-deep: var(--tangerine-deep);
+  --color-tangerine-wash: var(--tangerine-wash);
+  --color-on-tangerine: var(--on-tangerine);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-danger: var(--danger);
+  --color-danger-wash: var(--danger-wash);
+  --font-display: var(--font-shoulders), "Arial Narrow", Arial, sans-serif;
+  --font-sans: var(--font-rubik), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-azeret), ui-monospace, Menlo, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+/* Big monitors: scale the layout up rather than leaving a narrow strip in the middle */
+@media (width >= 1800px) {
+  html { font-size: 112.5%; }
+}
+@media (width >= 2300px) {
+  html { font-size: 125%; }
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-rubik), "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+::selection { background: var(--tangerine); color: var(--on-tangerine); }
+
+:focus-visible {
+  outline: 2.5px solid var(--tangerine);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@utility site-wrap {
+  width: min(72rem, 100% - 2rem);
+  margin-inline: auto;
+}
+
+@utility label-caps {
+  display: block;
+  font-family: var(--font-azeret), ui-monospace, monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* Painted court line: a double rule under section eyebrows */
+@utility court-rule {
+  border-top: 5px double var(--court);
+}
+
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.25rem;
+    border: 1.5px solid transparent;
+    border-radius: 8px;
+    font-family: var(--font-shoulders), Arial, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.16s, border-color 0.16s, color 0.16s, transform 0.12s;
+  }
+  .btn:active:not(:disabled) { transform: translateY(1px); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-primary { background: var(--tangerine); border-color: var(--tangerine); color: var(--on-tangerine); }
+  .btn-primary:hover:not(:disabled) { background: var(--tangerine-deep); border-color: var(--tangerine-deep); }
+  .btn-court { background: var(--court); border-color: var(--court); color: #fff; }
+  .btn-court:hover:not(:disabled) { background: var(--court-deep); border-color: var(--court-deep); }
+  .btn-ghost { background: transparent; border-color: var(--line); color: var(--ink); }
+  .btn-ghost:hover:not(:disabled) { border-color: var(--ink-faint); background: var(--surface); }
+  .btn-sm { padding: 0.5rem 0.85rem; font-size: 0.92rem; }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.42rem 0.8rem;
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .chip:hover { border-color: var(--ink-faint); color: var(--ink); }
+  .chip[aria-pressed="true"] { background: var(--court); border-color: var(--court); color: #fff; }
+
+  .field {
+    width: 100%;
+    min-width: 0;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--ink);
+    padding: 0.7rem 0.85rem;
+    font-size: 1rem; /* 16px keeps iOS from zooming on focus */
+  }
+  .field:focus { outline: none; border-color: var(--court); box-shadow: 0 0 0 3px var(--court-wash); }
+  .field[aria-invalid="true"] { border-color: var(--danger); }
+  .field-error { font-size: 0.82rem; color: var(--danger); }
+
+  /* Time-slot grid */
+  .slot {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+    padding: 0.6rem 0.7rem;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s, transform 0.15s;
+  }
+  .slot:hover:not(:disabled) { border-color: var(--court); }
+  .slot[aria-pressed="true"] {
+    background: var(--tangerine);
+    border-color: var(--tangerine);
+    color: var(--on-tangerine);
+    transform: scale(1.02);
+  }
+  .slot[aria-pressed="true"] .slot-price { color: var(--on-tangerine); opacity: 0.8; }
+  .slot:disabled { cursor: not-allowed; color: var(--ink-faint); }
+  .slot-taken {
+    background: repeating-linear-gradient(135deg, var(--surface-2) 0 6px, var(--line-soft) 6px 12px);
+    border-style: dashed;
+  }
+  .slot-past { opacity: 0.45; }
+  .slot-time { font-family: var(--font-shoulders), Arial, sans-serif; font-size: 1.15rem; font-weight: 700; line-height: 1; }
+  .slot-price { font-family: var(--font-azeret), monospace; font-size: 0.72rem; color: var(--ink-faint); }
+
+  .spinner {
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    border: 3px solid var(--line);
+    border-top-color: var(--tangerine);
+    animation: spin 0.8s linear infinite;
+  }
+  .check-draw { stroke-dasharray: 60; stroke-dashoffset: 60; animation: draw 0.7s 0.2s ease-out forwards; }
+  .pop-in { animation: pop 0.45s cubic-bezier(0.2, 1.2, 0.3, 1) backwards; }
+  .rise { animation: rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards; animation-delay: var(--d, 0ms); }
+
+  .scroll-x {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 0.25rem;
+    scroll-snap-type: x proximity;
+  }
+  .scroll-x::-webkit-scrollbar { display: none; }
+  .scroll-x > * { scroll-snap-align: start; flex: none; }
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes pop { from { opacity: 0; transform: scale(0.6); } }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .check-draw { stroke-dashoffset: 0; }
+}
