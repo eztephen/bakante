@@ -4,6 +4,8 @@ Book a court to play. Badminton, pickleball, basketball and volleyball venues ac
 
 *Bakante* (ba-KAN-te) is Filipino for "vacant" — what the front desk says when there's a slot.
 
+**Live:** https://bakante.vercel.app
+
 This is a **product sample**: everything works end to end in the browser, but bookings and payments are simulated and saved only on the visitor's device.
 
 Next.js 16, React 19, Tailwind CSS v4, TypeScript. No other dependencies.
